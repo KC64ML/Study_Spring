@@ -5,6 +5,10 @@ import hello.core.member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class SingletonTest {
 
@@ -23,6 +27,30 @@ public class SingletonTest {
         System.out.println("memberService2 = " + memberService2);
 
         // memberService != memberService2
-        Assertions.assertThat(memberService1).isNotSameAs(memberService2);
+        assertThat(memberService1).isNotSameAs(memberService2);
+
+        // isSameAs는 동일성비교로 연산자 == 와 동일하며 isEqualTo가 동등비교로 equals연산자와 동일하다.
+        // 간단히 말해 동일비교는 참조값 비교, 동등비교는 내용물(값) 비교
+    }
+
+
+    @Test
+    @DisplayName("스프링 컨테이너와 싱글톤")
+    void springContatiner(){
+        //AppConfig appConfig = new AppConfig();
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        // 1. 조회 : 호출할 때마다 객체 생성
+        MemberService memberService1 = ac.getBean("memberService",MemberService.class);
+        MemberService memberService2 = ac.getBean("memberService",MemberService.class);
+
+        // 3. 참조값 확인
+        System.out.println("memberService1 = " + memberService1);
+        System.out.println("memberService2 = " + memberService2);
+
+        // memberService != memberService2
+        assertThat(memberService1).isSameAs(memberService2);
+
+        // isSameAs는 동일성비교로 연산자 == 와 동일하며 isEqualTo가 동등비교로 equals연산자와 동일하다.
+        // 간단히 말해 동일비교는 참조값 비교, 동등비교는 내용물(값) 비교
     }
 }
