@@ -33,6 +33,8 @@ public class ResponseHeaderServlet extends HttpServlet {
 //        content(response);
 //        cookie(response);
         redirect(response);
+
+        // [message body]
         PrintWriter writer = response.getWriter();
         writer.println("ok"); // messagebody에 출력된다.
 
