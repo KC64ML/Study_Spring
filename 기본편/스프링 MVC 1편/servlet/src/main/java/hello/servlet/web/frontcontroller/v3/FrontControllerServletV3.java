@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // /front-controller/v3/members/new-form
-@WebServlet(name = "frontControllerServletv3", urlPatterns = "/front-controller/v3/*")
+@WebServlet(name = "frontControllerServletV3", urlPatterns = "/front-controller/v3/*")
 public class FrontControllerServletV3 extends HttpServlet {
 
     private Map<String, ControllerV3> controllerv3Map = new HashMap<>();
