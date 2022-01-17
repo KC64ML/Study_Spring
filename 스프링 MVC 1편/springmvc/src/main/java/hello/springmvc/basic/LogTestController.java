@@ -27,3 +27,5 @@ public class LogTestController {
         // 문자 반환시 String이 반환된다.
     }
 }
+
+

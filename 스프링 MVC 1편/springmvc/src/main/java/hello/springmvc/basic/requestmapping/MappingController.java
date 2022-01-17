@@ -35,10 +35,10 @@ public class MappingController {
     /**
      * 편리한 축약 애노테이션 (코드보기) * @GetMapping
      *
-     * @PostMapping
-     * @PutMapping
-     * @DeleteMapping
-     * @PatchMapping
+     * .@PostMapping
+     * .@PutMapping
+     * .@DeleteMapping
+     * .@PatchMapping
      */
     @GetMapping(value = "/mapping-get-v2")
     public String mappingGetV2() {
@@ -51,10 +51,10 @@ public class MappingController {
      * PathVariable 사용
      * 변수명이 같으면 생략 가능
      *
-     * @PathVariable("userId") String userId -> @PathVariable userId
+     * .@PathVariable("userId") String userId -> @PathVariable userId
      * /mapping/userA
      */
-    @GetMapping
+    @GetMapping("/mapping/{userId}")
     public String mappingPath(@PathVariable("userId") String data) {
         log.info("mappingPath userId={}", data);
         return "ok";
