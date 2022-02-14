@@ -1,5 +1,6 @@
 package hello.login.domain.item;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Repository
 public class ItemRepository {
 
@@ -15,6 +17,7 @@ public class ItemRepository {
 
     public Item save(Item item) {
         item.setId(++sequence);
+        log.info("Item id={}", sequence);
         store.put(item.getId(), item);
         return item;
     }
