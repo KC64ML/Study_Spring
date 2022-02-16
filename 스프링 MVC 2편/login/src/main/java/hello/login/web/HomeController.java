@@ -86,6 +86,7 @@ public class HomeController {
     public String homeLoginV3Spring(
             @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember, Model model) {
 
+        log.info("메인화면 실행");
 
         // 세션에 회원 데이터가 없으면 home
         if (loginMember == null) {
