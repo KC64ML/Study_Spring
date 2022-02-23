@@ -33,6 +33,7 @@ public class ItemController {
     @GetMapping("/{itemId}")
     public String item(@PathVariable long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
+        log.info("itemid = {}", itemId);
         model.addAttribute("item", item);
         return "items/item";
     }

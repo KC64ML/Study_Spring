@@ -27,8 +27,11 @@ public class LoginController {
     private final LoginService loginService;
     private final SessionManager sessionManager;
 
+    // login화면으로 이동하기
+    // login Form 띄우기(보여주기)
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
+        log.info("loginForm 실행");
         return "login/loginForm";
     }
 
@@ -105,10 +108,15 @@ public class LoginController {
     /**
      * 로그인 이후 redirect 처리
      */
+
+    // 로그인 화면에서 아이디, 패스워드 입력에 따른 대응
+    // 로그인 처리 대응
     @PostMapping("/login")
     public String loginV4(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult,
                           @RequestParam(defaultValue = "/") String redirectURL,
                           HttpServletRequest request) {
+
+        log.info("loginV4 실행");
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
         }
