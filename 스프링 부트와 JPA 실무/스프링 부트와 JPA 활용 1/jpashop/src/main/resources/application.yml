@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/jpashop;  # 여기해결해야함 14:01분
+    url: jdbc:h2:tcp://localhost//Users/leekyoungchang/Desktop/Study/Computer/Spring/JPA(pdf, ppt)/스프링 부트와 JPA 활용 1/자료/db/jpashop  # 여기해결해야함 14:01분
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -15,3 +15,5 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
+#    org.hibernate,type: trace
+
