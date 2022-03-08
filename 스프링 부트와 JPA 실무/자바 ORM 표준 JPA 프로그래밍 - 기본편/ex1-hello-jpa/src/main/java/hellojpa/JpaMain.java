@@ -2,6 +2,7 @@ package hellojpa;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -28,12 +29,12 @@ public class JpaMain {
             em.close();
 
             Member findMember = em.find(Member.class, member.getId());
+            List<Member> members = findMember.getTeam().getMembers();
 
-            Team findTeam = findMember.getTeam();
-            System.out.println("findTeam.getName() = " + findTeam.getName());
+            for (Member m : members) {
+                System.out.println("m.getUsername() = " + m.getUsername());
 
-            Team newTeam = em.find(Team.class, 100L);
-            findMember.setTeam(newTeam);
+            }
 
             tx.commit();
         }catch (Exception e){
