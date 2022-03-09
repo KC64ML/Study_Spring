@@ -8,14 +8,15 @@ public class Member {
     @Id @GeneratedValue
     @Column(name="MEMBER_ID")
     private Long id;
-
-    @Column(name = "USERNAME")
     private String username;
 
     @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
+    @JoinColumn(name ="TEAM_ID", insertable = false, updatable = false)
     private Team team;
 
+    @OneToOne
+    @JoinColumn(name ="LOCKER_ID")
+    private Locker locker;
 
     public Long getId() {
         return id;
@@ -33,11 +34,4 @@ public class Member {
         this.username = username;
     }
 
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
 }

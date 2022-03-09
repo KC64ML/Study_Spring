@@ -2,7 +2,6 @@ package hellojpa;
 
 
 import javax.persistence.*;
-import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -15,26 +14,19 @@ public class JpaMain {
 
         try {
 
-            // 저장
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
+            Movie movie = new Movie();
+            movie.setDirector("aaaa");
+            movie.setActor("bbbb");
+            movie.setName("바람과 함께 사라지다");
+            movie.setPrice(10000);
 
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setTeam(team);
-            em.persist(member);
+            em.persist(movie);
 
             em.flush();
-            em.close();
+            em.clear();
 
-            Member findMember = em.find(Member.class, member.getId());
-            List<Member> members = findMember.getTeam().getMembers();
-
-            for (Member m : members) {
-                System.out.println("m.getUsername() = " + m.getUsername());
-
-            }
+            Item item = em.find(Item.class, movie.getId());
+            System.out.println("item = " + item);
 
             tx.commit();
         }catch (Exception e){
