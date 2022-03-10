@@ -2,6 +2,7 @@ package hellojpa;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -14,19 +15,21 @@ public class JpaMain {
 
         try {
 
-            Movie movie = new Movie();
-            movie.setDirector("aaaa");
-            movie.setActor("bbbb");
-            movie.setName("바람과 함께 사라지다");
-            movie.setPrice(10000);
+            Member member1 = new Member();
+            member1.setUsername("member1");
+            em.persist(member1);
 
-            em.persist(movie);
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            em.persist(member2);
 
             em.flush();
             em.clear();
 
-            Item item = em.find(Item.class, movie.getId());
-            System.out.println("item = " + item);
+            Member m1 = em.find(Member.class, member1.getId());
+            Member m2 = em.getReference(Member.class, member2.getId());
+
+            System.out.println("(m1.getClass() == m2.getClass()) : " + (m1.getClass() == m2.getClass()));
 
             tx.commit();
         }catch (Exception e){
@@ -38,4 +41,5 @@ public class JpaMain {
         emf.close();
 
     }
+
 }
