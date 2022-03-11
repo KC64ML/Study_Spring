@@ -1,6 +1,7 @@
 package hellojpa;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Order;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +13,14 @@ public class Member extends BaseEntity {
     @Column(name="MEMBER_ID")
     private Long id;
     private String username;
+    private Integer age;
 
-    @ManyToOne
-    @JoinColumn(name ="TEAM_ID", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private Team team;
 
+//    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//    private List<Order> orders;
 
     public Long getId() {
         return id;
