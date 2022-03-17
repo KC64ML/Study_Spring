@@ -40,15 +40,11 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select m from Member m join fetch m.team";
 
-            List<Member> result = em.createQuery(query, Member.class)
-                    .getResultList();
-
-
-            for (Member s : result) {
-                System.out.println("member = " + s.getUsername() + ", " + s.getTeam().getName());
-            }
+            // FLUSH 자동 호출
+            int resultCount = em.createQuery("update Member m set m.age = 20")
+                    .executeUpdate();
+            System.out.println("resultCount = " + resultCount);
 
             tx.commit();
         } catch (Exception e) {
