@@ -14,17 +14,21 @@ public class JpaMain {
 
         try {
 
-            Member member1 = new Member("member1", "회원1");
+
+            // 회원1 저장
+            Member member1 = new Member(1L, "회원1");
+            member1.setTeam(null);  // 연관관계 설정 team1 -> team1
             em.persist(member1);
 
-            Member member2 = new Member("member2", "회원2");
-            em.persist(member2);
+            // 팀1 저장
+            Team teamA = em.find(Team.class, 2L);
+            List<Member> members = teamA.getMembers();
 
-            Team team1 = new Team("team1", "팀1");
-            team1.getMembers().add(member1);
-            team1.getMembers().add(member2);
+            members.get(0).setTeam(null);
+ 
 
-            em.persist(team1);
+
+
 
             tx.commit();
         } catch (Exception e) {
