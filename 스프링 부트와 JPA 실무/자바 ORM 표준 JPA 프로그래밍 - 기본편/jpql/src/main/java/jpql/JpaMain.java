@@ -14,37 +14,17 @@ public class JpaMain {
 
         try {
 
-            Team teamA = new Team();
-            teamA.setName("팀A");
-            em.persist(teamA);
+            Member member1 = new Member("member1", "회원1");
+            em.persist(member1);
 
-            Team teamB = new Team();
-            teamB.setName("팀B");
-            em.persist(teamB);
-
-            Member member = new Member();
-            member.setUsername("회원1");
-            member.setTeam(teamA);
-            em.persist(member);
-
-            Member member2 = new Member();
-            member2.setUsername("회원2");
-            member2.setTeam(teamA);
+            Member member2 = new Member("member2", "회원2");
             em.persist(member2);
 
-            Member member3 = new Member();
-            member3.setUsername("회원3");
-            member3.setTeam(teamB);
-            em.persist(member3);
+            Team team1 = new Team("team1", "팀1");
+            team1.getMembers().add(member1);
+            team1.getMembers().add(member2);
 
-            em.flush();
-            em.clear();
-
-
-            // FLUSH 자동 호출
-            int resultCount = em.createQuery("update Member m set m.age = 20")
-                    .executeUpdate();
-            System.out.println("resultCount = " + resultCount);
+            em.persist(team1);
 
             tx.commit();
         } catch (Exception e) {
