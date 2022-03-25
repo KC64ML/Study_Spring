@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c105518e-1004-4ac9-ade0-4f4b2c94a057" name="Changes" comment="" />
+    <list default="true" id="c105518e-1004-4ac9-ade0-4f4b2c94a057" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Album.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/BaseEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Item.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Locker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/JpaMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JpaMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Team.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +48,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />

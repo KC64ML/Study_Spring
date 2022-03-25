@@ -2,6 +2,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,53 +14,30 @@ public class JpaMain {
         tx.begin();
 
         try {
-//팀 저장
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
-
-            Team team2 = new Team();
-            team2.setName("TeamB");
-            em.persist(team2);
-//회원 저장
             Member member = new Member();
-            member.setName("member1");
-            member.setTeam(team);
-            member.setTeam(team2);
+            member.setUsername("user");
+
             em.persist(member);
-
-            Member member2 = new Member();
-            member2.setName("member2");
-            member2.setTeam(team);
-            member2.setTeam(team2);
-            em.persist(member2);
-
-
 
             em.flush();
             em.clear();
 
-            //조회
-            Team team3 = em.find(Team.class, 1L);
-            Team team4 = em.find(Team.class, 2L);
-            System.out.println("team3 = " + team3);
-            System.out.println("team3 = " + team4);
-            List<Member> members = team3.getMembers(); // (팀 -> 회원) 객체 그래프 탐색
-            List<Member> members2 = team4.getMembers(); // (팀 -> 회원) 객체 그래프 탐색
+            Member refMember = em.getReference(Member.class, member.getId()); //Proxy
+            System.out.println("refMember = " + refMember.getClass());
 
-            for (Member  m : members) {
-                System.out.println("member.username = " + m.getName());
-            }
+//            em.detach(refMember); // 영속성 컨텍스트에서 끄집어 낸다. refMember를 영속성 컨텍스트에서 관리안하겠다.
 
-            for (Member  m : members2) {
-                System.out.println("member2.username = " + m.getName());
-            }
+            em.close();  // 영속성 컨텍스트를 종료해버린다. 똑같이 refMember를 호출해봐야 조회돼지 않는다.
+            System.out.println("refMember.getUsername() = " + refMember.getUsername()); //
 
+
+            //  could not initialize proxy [Member#1] - no Session  proxy를 초기화 할 수 없다.
+            // 영속성 컨텍스트에 해당 refMember이 없어요!
             tx.commit();
-//            HelloAb
         } catch (Exception e) {
             System.out.println("예외 발생");
             tx.rollback();
+            e.printStackTrace();
         }finally{
             em.close();
         }

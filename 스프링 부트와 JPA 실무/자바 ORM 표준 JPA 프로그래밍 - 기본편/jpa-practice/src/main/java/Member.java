@@ -1,34 +1,27 @@
 import javax.persistence.*;
 
 @Entity
-
-public class Member {
+public class Member extends BaseEntity {
     @Id @GeneratedValue
-    @Column(name="MEMBER_ID")
+    @Column(name = "MEMBER_ID")
     private Long id;
 
-    @Column(name = "USERNAME")
-    private String name;
-
+    private String username;
 
 //    @ManyToOne
-//    @JoinColumn(name = "TEAM_ID")
-//    private Long teamId;
+//    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
+//    private Team team;
 
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
-    private Team team;
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
 
-    public Team getTeam() {
-        return team;
+    public Locker getLocker() {
+        return locker;
     }
 
-    public void setTeam(Team team) {
-        if(this.team != null) {	// this.team이 null이 아니면 이 member객체는 team이 있음을 의미
-            this.team.getMembers().remove(this);		// 해당 팀의 멤버에서 삭제
-        }
-        this.team = team;
-        team.getMembers().add(this);
+    public void setLocker(Locker locker) {
+        this.locker = locker;
     }
 
     public Long getId() {
@@ -39,11 +32,11 @@ public class Member {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
