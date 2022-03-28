@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Member{
+public class Member extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name="MEMBER_ID")
@@ -22,11 +22,6 @@ public class Member{
     )
     @Column(name="FOOD_NAME")
     private Set<String> favoriteFoods = new HashSet<>();
-
-//    @ElementCollection
-//    @CollectionTable(name="ADDRESS", joinColumns =
-//    @JoinColumn(name = "MEMBER_ID"))
-//    private List<Address> addressHistory = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="MEMBER_ID")

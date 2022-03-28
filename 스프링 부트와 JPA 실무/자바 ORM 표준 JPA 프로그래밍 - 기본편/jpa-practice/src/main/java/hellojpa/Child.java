@@ -1,22 +1,26 @@
+package hellojpa;
+
 import javax.persistence.*;
 
 @Entity
-public class Locker {
+public class Child {
+
     @Id
     @GeneratedValue
-    @Column(name = "LOCKER_ID")
     private Long id;
+
     private String name;
 
-    @OneToOne(mappedBy = "locker")
-    private Member member;
+    @ManyToOne
+    @JoinColumn(name="parent_id")
+    private Parent parent;
 
-    public Member getMember() {
-        return member;
+    public Parent getParent() {
+        return parent;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 
     public Long getId() {

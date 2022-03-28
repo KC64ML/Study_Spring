@@ -1,3 +1,5 @@
+package hellojpa;
+
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
