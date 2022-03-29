@@ -28,34 +28,16 @@ public class JpaMain {
             member.getFavoriteFoods().add("탕수육");
 
 // 임베디드 값 타입 컬렉션
-            member.getAddressHistory().add(new Address("서울", "강남", "123-123"));
-            member.getAddressHistory().add(new Address("부산", "강북", "000-000"));
+            member.getAddressHistory().add(new AddressEntity("서울", "강남", "123-123"));
+            member.getAddressHistory().add(new AddressEntity("부산", "강북", "000-000"));
 
+            // 일대다 member 하나에 Address 2개 추가됨
             em.persist(member);
 
             em.flush();
             em.clear();
 
-            //
             System.out.println("========START============");
-            Member findMember = em.find(Member.class, member.getId());
-
-            // homeCity --> newCity
-            // findMember.getHomeAddress().setCity("newCity"); 이는 잘못된 것이다.
-
-            // 1
-            Address a = findMember.getHomeAddress();
-            findMember.setHomeAddress(new Address("newCity", a.getStreet(),a.getZipcode()));
-
-            // 2
-            // 치칸 -> 한식
-            findMember.getFavoriteFoods().remove("치킨");
-            findMember.getFavoriteFoods().add("치킨");
-
-            // 3
-            // 업데이트
-            findMember.getAddressHistory().remove(new Address("서울", "강남", "123-123"));
-            findMember.getAddressHistory().add(new Address("newCity1", "street", "1000"));
 
             System.out.println("========end============");
 

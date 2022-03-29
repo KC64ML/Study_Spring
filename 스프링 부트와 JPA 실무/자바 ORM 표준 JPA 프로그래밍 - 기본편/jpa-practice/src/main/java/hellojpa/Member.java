@@ -29,10 +29,17 @@ public class Member {
     @Column(name = "FOOD_NAME")
     private Set<String> favoriteFoods = new HashSet<String>();
 
-    @ElementCollection
-    @CollectionTable(name = "ADDRESS",
-            joinColumns = @JoinColumn(name = "MEMBER_ID"))
-    private List<Address> addressHistory = new ArrayList<Address>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMBER_ID")
+    private List<AddressEntity> addressHistory = new ArrayList<>();
+
+    public List<AddressEntity> getAddressHistory() {
+        return addressHistory;
+    }
+
+    public void setAddressHistory(List<AddressEntity> addressHistory) {
+        this.addressHistory = addressHistory;
+    }
 
     public Set<String> getFavoriteFoods() {
         return favoriteFoods;
@@ -40,14 +47,6 @@ public class Member {
 
     public void setFavoriteFoods(Set<String> favoriteFoods) {
         this.favoriteFoods = favoriteFoods;
-    }
-
-    public List<Address> getAddressHistory() {
-        return addressHistory;
-    }
-
-    public void setAddressHistory(List<Address> addressHistory) {
-        this.addressHistory = addressHistory;
     }
 
     public Address getHomeAddress() {
