@@ -17,30 +17,12 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
+            String jpql = "select m From Member m where m.username like '%kim%'";
+            List<Member> result = em.createQuery(jpql, Member.class).getResultList();
 
-// 임베디드 값 타입
-            member.setHomeAddress(new Address("통영", "몽돌해수욕장", "660-123"));
-
-// 기본값 타입 컬렉션
-            member.getFavoriteFoods().add("짬뽕");
-            member.getFavoriteFoods().add("짜장");
-            member.getFavoriteFoods().add("탕수육");
-
-// 임베디드 값 타입 컬렉션
-            member.getAddressHistory().add(new AddressEntity("서울", "강남", "123-123"));
-            member.getAddressHistory().add(new AddressEntity("부산", "강북", "000-000"));
-
-            // 일대다 member 하나에 Address 2개 추가됨
-            em.persist(member);
-
-            em.flush();
-            em.clear();
-
-            System.out.println("========START============");
-
-            System.out.println("========end============");
-
+            for (Member member : result) {
+                System.out.println("member = " + member);
+            }
             tx.commit();
         } catch (Exception e) {
             System.out.println("예외 발생");
