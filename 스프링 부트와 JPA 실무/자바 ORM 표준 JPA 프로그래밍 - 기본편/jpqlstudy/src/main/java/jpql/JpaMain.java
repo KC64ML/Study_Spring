@@ -12,37 +12,49 @@ public class JpaMain {
 
         try {
 
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
+            Team teamA = new Team();
+            teamA.setName("teamA");
+            em.persist(teamA);
+
+            Team teamB = new Team();
+            teamB.setName("teamB");
+            em.persist(teamB);
 
             Member member = new Member();
-            member.setUsername("teamA");
-            member.setAge(10);
-            member.setType(MemberType.ADMIN);   // type이 ADMIN
+            member.setUsername("회원1");
+            member.setTeam(teamA);
             em.persist(member);
 
+            Member member2 = new Member();
+            member2.setUsername("회원2");
+            member2.setTeam(teamA);
+            em.persist(member2);
 
+            Member member3 = new Member();
+            member3.setUsername("회원3");
+            member3.setTeam(teamB);
+            em.persist(member3);
 
             // 영속성 컨텍스트 비우기
             em.flush();
             em.clear();
 
+            String query = "select distinct t from Team t join fetch t.members";
 
-            // jpql.MemberType.ADMIN 타입의 USER만 조회한다.
-            String jpql = "select m.username, 'HELLO', TRUE From Member m "
-                    + "where m.type = :userType";
+            List<Team> result = em.createQuery(query, Team.class).getResultList();
 
-            List<Object[]> resultList = em.createQuery(jpql)
-                    .setParameter("userType",MemberType.ADMIN)
-                    .getResultList();
+//            System.out.println("result.size() = " + result.size());
 
-            for (Object[] member1 : resultList) {
-                System.out.println("member1[0] = " + member1[0]);
-                System.out.println("member1[1] = " + member1[1]);
-                System.out.println("member1[2] = " + member1[2]);
+            for (Team team : result) {
+
+                System.out.println("teamname = " + team.getName() + ", team = " + team);
+
+                for (Member m : team.getMembers()) {
+
+                    // 페치 조인으로 팀과 회원을 함께 조회해서 지연 로딩 발생 안함
+                    System.out.println("->username = " + m.getUsername() + ", member = " + m);
+                }
             }
-
 
             tx.commit();
         } catch (Exception e) {

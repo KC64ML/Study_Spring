@@ -25,10 +25,6 @@ public class JpaMain {
             List<Member> members = teamA.getMembers();
 
             members.get(0).setTeam(null);
- 
-
-
-
 
             tx.commit();
         } catch (Exception e) {
