@@ -35,26 +35,33 @@ public class JpaMain {
             member3.setTeam(teamB);
             em.persist(member3);
 
-            // 영속성 컨텍스트 비우기
-            em.flush();
+            // FLUSH 자동 호출
+            // flush는 commit, query를 호출할 때 자동 호출된다.
+            // flush 되기 전까지 Member의 age는 0이 저장되어 있다.
+            // 이로인해 영속성 컨텍스트에는 member의 age는 0이 저장되고 DB도 0이 저장된다.
+
+            int resultCount = em.createQuery("update Member m set m.age = 20")
+                    .executeUpdate();
+
+            // 이때 createQuery update문으로 Database에 나이를 20으로 업데이트 하는 문장이 있다.
+            // 이로써, Database는 20으로 업데이트 되지만, 영속성 컨텍스트에는 여전히 Member의 age는 0으로 저장되어 있다.
+
+            System.out.println("resultCount = " + resultCount);
+
+            System.out.println("member = " +member.getAge());
+            System.out.println("member2 = " +member2.getAge());
+            System.out.println("member3 = " +member3.getAge());
+
+            // 그리고 영속성 컨텍스트 find 메서드를 호출해서 조회해도 여전히 0으로 저장된다.
+            Member findMember = em.find(Member.class, member.getId());
+
+            System.out.println("findMember = " + findMember);
+
+
+            // 그냥 벌크 연산을 할 경우, db에만 반영된다.
+            // 그러므로 벌크 연산을 사용한 후 바로, clear()메서드를 호출해야 한다.
             em.clear();
 
-            String query = "select distinct t from Team t join fetch t.members";
-
-            List<Team> result = em.createQuery(query, Team.class).getResultList();
-
-//            System.out.println("result.size() = " + result.size());
-
-            for (Team team : result) {
-
-                System.out.println("teamname = " + team.getName() + ", team = " + team);
-
-                for (Member m : team.getMembers()) {
-
-                    // 페치 조인으로 팀과 회원을 함께 조회해서 지연 로딩 발생 안함
-                    System.out.println("->username = " + m.getUsername() + ", member = " + m);
-                }
-            }
 
             tx.commit();
         } catch (Exception e) {
