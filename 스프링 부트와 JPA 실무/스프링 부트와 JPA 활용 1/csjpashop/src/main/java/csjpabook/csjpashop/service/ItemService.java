@@ -2,6 +2,7 @@ package csjpabook.csjpashop.service;
 
 
 import csjpabook.csjpashop.domain.Item;
+import csjpabook.csjpashop.domain.item.Book;
 import csjpabook.csjpashop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,13 +22,19 @@ public class ItemService {
         itemRepository.save(item);
     }
 
-    public List<Item> findItem() {
+    @Transactional
+    public void updateItem(Long itemId, String name, int price, int stockQuantity) {
+        Item findItem = itemRepository.findOne(itemId);
+        findItem.setName(name);
+        findItem.setPrice(price);
+        findItem.setStockQuantity(stockQuantity);
+    }
+
+    public List<Item> findItems() {
         return itemRepository.findAll();
     }
 
     public Item findOne(Long itemId) {
         return itemRepository.findOne(itemId);
     }
-
-
 }

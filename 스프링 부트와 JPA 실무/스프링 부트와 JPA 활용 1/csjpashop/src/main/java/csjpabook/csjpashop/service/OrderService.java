@@ -6,9 +6,12 @@ import csjpabook.csjpashop.domain.Member;
 import csjpabook.csjpashop.repository.ItemRepository;
 import csjpabook.csjpashop.repository.MemberRepository;
 import csjpabook.csjpashop.repository.OrderRepository;
+import csjpabook.csjpashop.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -60,7 +63,7 @@ public class OrderService {
     }
 
     // 검색
-//    public List<Order> findOrders(OrderSearch.orderSearch) {
-//        return orderRepository.findOne(orderSearch);
-//    }
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
+    }
 }
