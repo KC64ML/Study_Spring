@@ -1,0 +1,18 @@
+spring: #띄어쓰기 없음
+  datasource: #띄어쓰기 2칸
+    url: jdbc:h2:tcp://localhost//Users/leekyoungchang/Desktop/Study/Computer/Spring/JPA(pdf, ppt)/스프링 부트와 JPA 활용 2/자료/db/jpashop2
+    username: sa
+    password: 1234
+    driver-class-name: org.h2.Driver
+  jpa: #띄어쓰기 2칸
+    hibernate: #띄어쓰기 4칸
+      ddl-auto: create #띄어쓰기 6칸
+    properties:
+      hibernate:
+        #        show_sql: true
+        format_sql: true #띄어쓰기 8칸
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+#    org.hibernate.type: trace
