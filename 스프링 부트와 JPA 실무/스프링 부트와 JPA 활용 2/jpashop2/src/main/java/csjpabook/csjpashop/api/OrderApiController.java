@@ -40,7 +40,7 @@ public class OrderApiController {
             // 초기화
             List<OrderItem> orderItems = order.getOrderItems();
             orderItems.stream().forEach(o -> o.getItem().getName());
-            
+
         }
         return all;
     }
