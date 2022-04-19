@@ -52,9 +52,14 @@ public class OrderSimpleApiController {
         // N + 1 -> 1 + 회원 N + 배송 N
         List<Order> orders = orderRepository.findAllByString(new OrderSearch());
 
+        // 현재 결과 주문 수 2개, 2번 루프를 돈다.
+        // 1번 루프돌 때
         List<SimpleOrderDto> result = orders.stream()
                 .map(SimpleOrderDto::new)
                 .collect(Collectors.toList());
+
+
+
         return result;
     }
 
@@ -94,10 +99,10 @@ public class OrderSimpleApiController {
 
         public SimpleOrderDto(Order order) {
             this.orderId = order.getId();
-            this.name = order.getMember().getName(); // LAZY 초기화
+            this.name = order.getMember().getName(); // LAZY 초기화, 지연로딩 조회
             this.orderDate = order.getOrderDate();
             this.orderStatus = order.getStatus();
-            this.address = order.getDelivery().getAddress(); // LAZY 초기화
+            this.address = order.getDelivery().getAddress(); // LAZY 초기화, 지연로딩 조회
         }
     }
 
