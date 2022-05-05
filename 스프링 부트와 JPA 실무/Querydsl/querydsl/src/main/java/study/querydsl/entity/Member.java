@@ -13,6 +13,7 @@ public class Member {
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
+
     private String username;
     private int age;
 
@@ -40,5 +41,4 @@ public class Member {
         this.team = team;
         team.getMembers().add(this);
     }
-
 }
