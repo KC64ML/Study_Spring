@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost//Users/leekyoungchang/Desktop/Study/Computer/Spring/JPA(pdf, ppt)/스프링 부트와 JPA 활용 1/자료/db/jpashop  # 여기해결해야함 14:01분
+    url: jdbc:h2:tcp://localhost/d:/Computer_Science/Database/db_dir/Mydailytp
     username: sa
-    password:
+    password: 1234
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
